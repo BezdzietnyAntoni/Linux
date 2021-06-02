@@ -4,4 +4,5 @@ project(udp_1)
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(udp_server udp_server.cpp)
-add_executable(udp_client udp_client.cpp)
+add_executable(udp_client udp_client.cpp wolframStructur.h)
+add_executable(clientv2 clientv2.cpp)
