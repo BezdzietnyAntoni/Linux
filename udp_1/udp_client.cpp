@@ -12,9 +12,10 @@
 #include <cstring>
 
 void readDataFromConsole(wolframStruct &);
+short parserPort(int, char**);
 
-int main(){
-    short port = 5000;
+int main(int argc, char* argv[]){
+    short port = parserPort(argc, argv);
 
     // Create socket
     int sfd = socket( AF_INET, SOCK_DGRAM, 0 );
@@ -64,7 +65,27 @@ int main(){
         // Display response
         std::cout << buffer << std::endl;
     }
-    return 0;
+}
+
+short parserPort(int argc, char** argv){
+    short port = 5000;
+
+    if(argc > 2){
+        std::cout << "Too many arguments !" << std::endl;
+        exit(1);
+    }
+
+    if(argc == 1){
+        return port;
+    }
+
+    int arg = std::stoi(argv[1]);
+    if(arg<=1024 || arg>=10000){
+        std::cout << "Port range (1024 10000)!" << std::endl;
+        exit(1);
+    }
+
+    return (short)arg;
 }
 
 void readDataFromConsole(wolframStruct & wolfram){
